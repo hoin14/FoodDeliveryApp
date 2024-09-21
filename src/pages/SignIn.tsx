@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import {RootStackParamList} from '../../App';
+import DismissKeyboardView from '../components/DismissKeyboardView';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -19,11 +20,11 @@ function SignIn({navigation}: SignInScreenProps) {
   const emailRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
 
-  const onChangeEmail = useCallback((text: React.SetStateAction<string>) => {
-    setEmail(text);
+  const onChangeEmail = useCallback((text: string) => {
+    setEmail(text.trim());
   }, []);
-  const onChangePassword = useCallback((text: React.SetStateAction<string>) => {
-    setPassword(text);
+  const onChangePassword = useCallback((text: string) => {
+    setPassword(text.trim());
   }, []);
 
   const onSubmit = useCallback(() => {
@@ -43,7 +44,7 @@ function SignIn({navigation}: SignInScreenProps) {
   const loginAvailable = email && password;
 
   return (
-    <View>
+    <DismissKeyboardView>
       <View style={styles.inputWrapper}>
         <Text style={styles.label}>이메일</Text>
         <TextInput
@@ -95,7 +96,7 @@ function SignIn({navigation}: SignInScreenProps) {
           <Text>회원가입</Text>
         </Pressable>
       </View>
-    </View>
+    </DismissKeyboardView>
   );
 }
 
