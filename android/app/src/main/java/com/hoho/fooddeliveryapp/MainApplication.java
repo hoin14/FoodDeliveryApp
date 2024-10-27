@@ -1,4 +1,4 @@
-package com.fooddeliveryapp;
+package com.hoho.fooddeliveryapp;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
