@@ -9,7 +9,7 @@ import {
 import React, {useCallback, useState} from 'react';
 import orderSlice, {Order} from '../slices/order';
 import {useAppDispatch} from '../store';
-
+import getDistanceFromLatLonInKm from '../util/utils';
 import axios, {AxiosError} from 'axios';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
@@ -17,7 +17,6 @@ import Config from 'react-native-config';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {LoggedInParamList} from '../../AppInner';
 import NaverMapView, {Marker, Path} from 'react-native-nmap';
-import getDistanceFromLatLonInKm from '../util/utils';
 
 interface Props {
   item: Order;
@@ -78,18 +77,19 @@ function EachOrder({item}: Props) {
       {detail && (
         <View>
           <View
+            // eslint-disable-next-line react-native/no-inline-styles
             style={{
               width: Dimensions.get('window').width - 30,
               height: 200,
               marginTop: 10,
             }}>
             <NaverMapView
+              // eslint-disable-next-line react-native/no-inline-styles
               style={{width: '100%', height: '100%'}}
-              zoomControl={true}
+              zoomControl={false}
               center={{
                 zoom: 10,
                 tilt: 50,
-                bearing: 0,
                 latitude: (start.latitude + end.latitude) / 2,
                 longitude: (start.longitude + end.longitude) / 2,
               }}>
